@@ -79,7 +79,8 @@ class RecipeDetails extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16.0)),
                     ),
                     onPressed: () {
-                      // TODO: Add insertRecipe here
+                      // The first step is to insert the recipe into the repository.
+                      repository.insertRecipe(recipe);
                       Navigator.pop(context);
                     },
                     icon: SvgPicture.asset(
