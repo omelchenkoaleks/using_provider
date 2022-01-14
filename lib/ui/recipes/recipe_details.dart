@@ -14,6 +14,8 @@ class RecipeDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // This uses Provider to retrieve the repository created in main.dart. Use it to add the bookmark.
+    final repository = Provider.of<MemoryRepository>(context);
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -28,9 +30,7 @@ class RecipeDetails extends StatelessWidget {
                     Align(
                       alignment: Alignment.topLeft,
                       child: CachedNetworkImage(
-                        // TODO: Replace imageUrl
-                        imageUrl:
-                            'https://www.edamam.com/web-img/e42/e42f9119813e890af34c259785ae1cfb.jpg',
+                        imageUrl: recipe.image ?? '',
                         alignment: Alignment.topLeft,
                         fit: BoxFit.fill,
                         width: size.width,
@@ -51,23 +51,23 @@ class RecipeDetails extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                // TODO: Replace hardcoded Chicken Vesuvio
-                const Padding(
-                  padding: EdgeInsets.only(left: 16.0),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
                   child: Text(
-                    'Chicken Vesuvio',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    recipe.label ?? '',
+                    style: const TextStyle(
+                        fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(
                   height: 16,
                 ),
-                // TODO: Replace hardcoded calories
-                const Padding(
-                    padding: EdgeInsets.only(left: 16.0),
-                    child: Chip(
-                      label: Text('16CAL'),
-                    )),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Chip(
+                    label: Text(getCalories(recipe.calories)),
+                  ),
+                ),
                 const SizedBox(
                   height: 16,
                 ),
